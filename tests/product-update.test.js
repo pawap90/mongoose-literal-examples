@@ -41,7 +41,7 @@ describe('product update ', () => {
     /**
     * Should throw an exception when the currency is set to "$" and the operator $literal is not applied.
     */
-    it('should fail isf currency = "$" and $literal is not applied', async () => {
+    it('should fail if currency = "$" and $literal is not applied', async () => {
         const currency = '$';
 
         const updateOperation = productModel.findByIdAndUpdate(productIphoneId,
@@ -102,11 +102,13 @@ describe('product update ', () => {
                 runValidators: true
             });
 
-        expect(async () => {
-            await updateOperation;
-        })
+        await expect(updateOperation)
+            .resolves
             .not
-            .toThrow();
+            .toThrow(mongoose.mongo.MongoError);
+
+        const updatedProduct = await productModel.findById(productIphoneId);
+        expect(updatedProduct.currency).toBe(currency);
     });
 
     /**
@@ -127,11 +129,14 @@ describe('product update ', () => {
                 runValidators: true
             });
 
-        expect(async () => {
-            await updateOperation;
-        })
+
+        await expect(updateOperation)
+            .resolves
             .not
-            .toThrow();
+            .toThrow(mongoose.mongo.MongoError);
+
+        const updatedProduct = await productModel.findById(productIphoneId);
+        expect(updatedProduct.priceWithCurrency).toBe(priceWithCurrency);
     });
 });
 
