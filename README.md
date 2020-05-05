@@ -1,6 +1,6 @@
 A Node.js + Mongoose + Jest project that demonstrates **how to use MongoDB's `$literal` operator** to fix some common issues.
 
-<!-- >This repo was build as an example for my article [Testing Node.js + Mongoose with an in-memory database](). -->
+>This repo was build as an example for my article [Testing Node.js + Mongoose with an in-memory database](https://dev.to/paulasantamaria/fixing-mongodb-s-error-by-itself-is-not-a-valid-fieldpath-12p1).
 
 # Dependencies
 What you need to run this project:
