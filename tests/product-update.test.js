@@ -42,36 +42,13 @@ describe('product update ', () => {
     * Should throw an exception when the currency is set to "$" and the operator $literal is not applied.
     */
     it('should fail if currency = "$" and $literal is not applied', async () => {
-        const currency = '$';
+        const newCurrency = '$';
 
         const updateOperation = productModel.findByIdAndUpdate(productIphoneId,
             [{
                 $set:
                 {
-                    currency: currency,
-                    updatedAt: '$$NOW'
-                }
-            }],
-            {
-                runValidators: true
-            });
-
-        await expect(updateOperation)
-            .rejects
-            .toThrow(mongoose.mongo.MongoError);
-    });
-
-    /**
-    * Should throw an exception when the priceWithCurrency is set to "$699" and the operator $literal is not applied.
-    */
-    it('should fail if priceWithCurrency = "$699" and $literal is not applied', async () => {
-        const priceWithCurrency = '$';
-
-        const updateOperation = productModel.findByIdAndUpdate(productIphoneId,
-            [{
-                $set:
-                {
-                    priceWithCurrency: priceWithCurrency,
+                    currency: newCurrency,
                     updatedAt: '$$NOW'
                 }
             }],
@@ -88,13 +65,13 @@ describe('product update ', () => {
     * Should update the document correctly when the currency is set to "$" but the $literal operator is applied.
     */
     it('should succeed if currency = "$" but $literal is applied', async () => {
-        const currency = '$';
+        const newCurrency = '$';
 
         const updateOperation = productModel.findByIdAndUpdate(productIphoneId,
             [{
                 $set:
                 {
-                    currency: { $literal: currency },
+                    currency: { $literal: newCurrency },
                     updatedAt: '$$NOW'
                 }
             }],
@@ -108,35 +85,7 @@ describe('product update ', () => {
             .toThrow(mongoose.mongo.MongoError);
 
         const updatedProduct = await productModel.findById(productIphoneId);
-        expect(updatedProduct.currency).toBe(currency);
-    });
-
-    /**
-    * Should update the document correctly when the priceWithCurrency is set to "$699" but the $literal operator is applied.
-    */
-    it('should succeed if priceWithCurrency = "$699" but $literal is applied', async () => {
-        const priceWithCurrency = '$699';
-
-        const updateOperation = productModel.findByIdAndUpdate(productIphoneId,
-            [{
-                $set:
-                {
-                    priceWithCurrency: { $literal: priceWithCurrency },
-                    updatedAt: '$$NOW'
-                }
-            }],
-            {
-                runValidators: true
-            });
-
-
-        await expect(updateOperation)
-            .resolves
-            .not
-            .toThrow(mongoose.mongo.MongoError);
-
-        const updatedProduct = await productModel.findById(productIphoneId);
-        expect(updatedProduct.priceWithCurrency).toBe(priceWithCurrency);
+        expect(updatedProduct.currency).toBe(newCurrency);
     });
 });
 
