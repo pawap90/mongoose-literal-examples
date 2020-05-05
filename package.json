@@ -1,0 +1,36 @@
+{
+  "name": "test-mongoose-inmemory",
+  "version": "1.0.0",
+  "description": "A sample project that demonstrates how to test mongoose operations through jest with an in-memory database.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --runInBand ./test",
+    "lint": "./node_modules/.bin/eslint ./",
+    "lint-fix": "./node_modules/.bin/eslint ./ --fix"
+  },
+  "keywords": [
+    "mongoose",
+    "inmemory",
+    "test",
+    "jest",
+    "mongodb"
+  ],
+  "author": "paula santamaría",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.9.12"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.0.0",
+    "mongodb-memory-server": "^6.5.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
